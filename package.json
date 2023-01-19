@@ -1,0 +1,20 @@
+{
+  "type": "module",
+  "name": "indented",
+  "version": "0.1.0",
+  "description": "Better indented multi line strings than regular template strings",
+  "exports": "dist/index.js",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.js",
+  "files": [
+    "dist/index.js",
+    "dist/index.umd.js"
+  ],
+  "scripts": {
+    "build": "rollup --config rollup.config.js"
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "0.3.0",
+    "rollup": "3.10.0"
+  }
+}
