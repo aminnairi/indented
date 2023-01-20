@@ -1,14 +1,39 @@
 {
   "type": "module",
   "name": "indented",
-  "version": "0.1.0",
   "description": "Better indented multi line strings than regular template strings",
+  "version": "1.0.0",
+  "homepage": "https://github.com/aminnairi/indented#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
   "exports": "dist/index.js",
-  "main": "dist/index.umd.js",
   "module": "dist/index.js",
+  "browser": "dist/index.umd.js",
+  "bugs": {
+    "url": "https://github.com/aminnairi/indented/issues"
+  },
+  "author": {
+    "name": "Amin NAIRI",
+    "url": "https://github.com/aminnairi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aminnairi/indented.git"
+  },
   "files": [
     "dist/index.js",
     "dist/index.umd.js"
+  ],
+  "keywords": [
+    "indent",
+    "indented",
+    "indentation",
+    "align",
+    "aligned",
+    "alignment",
+    "string",
+    "text",
+    "template"
   ],
   "scripts": {
     "build": "rollup --config rollup.config.js"
