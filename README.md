@@ -2,11 +2,111 @@
 
 Better indented multi line strings than regular template strings
 
+```html
+<!DOCTYPE html>
+<html lang="en-US">
+  <body>
+    <code>
+      <pre id="code"></pre>
+    </code>
+    <script type="module">
+      import { indented } from "https://unpkg.com/indented?module"
+
+      const codeElement = document.getElementById("code")
+
+      if (!(codeElement instanceof HTMLElement)) {
+        throw new Error("Code element not found")
+      }
+
+      const code = indented`
+        window.addEventListener("load", () => {
+          const greet = (name) => {
+            if (name === undefined) {
+              return "Hello stranger"
+            } 
+
+            return "Hello " + name
+          }
+
+          if (Math.random() > 0.5) {
+            greet("John")
+          } else {
+            greet("Jane")
+          }
+        })
+      `
+      
+      codeElement.innerText = code
+    </script>
+  </body>
+</html>
+```
+
+```
+window.addEventListener("load", () => {
+  const greet = (name) => {
+    if (name === undefined) {
+      return "Hello stranger"
+    } 
+
+    return "Hello " + name
+  }
+
+  if (Math.random() > 0.5) {
+    greet("John")
+  } else {
+    greet("Jane")
+  }
+})
+```
+
 ## Why
 
 Using multiline strings in a deeply nested block can be tedious even when using template strings in JavaScript because they keep the extra space added when indenting the code, making it hard to create properly indented blocks of strings that span over multiple lines. This library is here to fix this behavior.
 
-This is particularily useful when creating blocks of code that needs to be indented inside of a template string for instance.
+This is particularily useful when creating blocks of code that needs to be indented inside of a template string for instance because it prevents writing this kind of code to have something properly indented visually for the user.
+
+
+```html
+<!DOCTYPE html>
+<html lang="en-US">
+  <body>
+    <code>
+      <pre id="code"></pre>
+    </code>
+    <script type="module">
+      const codeElement = document.getElementById("code")
+
+      if (!(codeElement instanceof HTMLElement)) {
+        throw new Error("Code element not found")
+      }
+
+      // Without this library, not really appealing visually, can cause
+      // slowdown in reading the code, not very convenient to have in the
+      // source-code
+      const code = `
+window.addEventListener("load", () => {
+  const greet = (name) => {
+    if (name === undefined) {
+      return "Hello stranger"
+    } 
+
+    return "Hello " + name
+  }
+
+  if (Math.random() > 0.5) {
+    greet("John")
+  } else {
+    greet("Jane")
+  }
+})
+      `
+      
+      codeElement.innerText = code
+    </script>
+  </body>
+</html>
+```
 
 ## How
 
@@ -16,8 +116,8 @@ Once it got that, it will simply remove the right amount of space needed to outp
 
 ## Requirements
 
-- Node
-- NPM
+- [Node](https://nodejs.org)
+- [NPM](https://www.npmjs.com)
 
 ## Installation
 
@@ -27,58 +127,67 @@ npm install indented
 
 ## Usage
 
+### Browser
+
+#### Module
+
+```html
+<script type="module">
+  import { indented } from "https://unpkg.com/indented?module"
+  
+  console.log(indented`
+    <h1>Hello</h1>
+  `)
+</script>
+```
+
+#### Script
+
+```html
+<script src="https://unpkg.com/indented"></script>
+<script>
+  const { indented } = window.indented
+
+  console.log(indented`
+    <h1>Hello</h1>
+  `)
+</script>
+```
+
+### Node
+
+#### Module
+
 ```javascript
 import { indented } from "indented"
 
-const helloInFrench = "Salut"
-const helloInEnglish = "Hello"
-
-const codeElement = document.getElementById("javascript")
-
-window.addEventListener("load", () => {
-  if (codeElement instanceof HTMLElement) {
-    codeElement.innerText = indented`
-      <script>
-        "use strict";
-            
-        if (window.navigator.language === "fr") {
-          console.log("${helloInFrench}")
-        } else {
-          console.log("${helloInEnglish}")
-        }
-      </script>
-    `
-  }
-})
-
+console.log(indented`
+  <h1>Hello</h1>
+`)
 ```
 
-Instead of this
+#### CommonJS
 
+```javascript
+const { indented } = require("indented")
+
+console.log(indented`
+  <h1>Hello</h1>
+`)
 ```
 
-      <script>
-        "use strict";
-            
-        if (window.navigator.language === "fr") {
-          console.log("${helloInFrench}")
-        } else {
-          console.log("${helloInEnglish}")
-        }
-      </script>
-      
-```
+## Code of conduct
 
-This library will output this
+See [`CODE_OF_CONDUCT`](./CODE_OF_CONDUCT.md).
 
-```
-<script>
-  "use strict";
-      
-  if (window.navigator.language === "fr") {
-    console.log("${helloInFrench}")
-  } else {
-    console.log("${helloInEnglish}")
-  }
-</script>
-```
+## Contributing
+
+See [`CONTRIBUTING.md`](./CONTRIBUTING.md).
+
+## License
+
+See [`LICENSE`](./LICENSE).
+
+## Security
+
+See [`SECURITY.md`](./SECURITY.md).
